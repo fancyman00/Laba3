@@ -35,26 +35,26 @@ int main()
 			read_and_check<double, function<bool(double)>>(
 				x,
 				[](double x) -> bool {return abs(x) < 1; },
-				"Введите x (|x|<1): ");
+				"Р’РІРµРґРёС‚Рµ x (|x|<1): ");
 			if (choice == 1)
 			{
 				int n;
-				cout << "Введите количество слагаемых: ";
+				cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃР»Р°РіР°РµРјС‹С…: ";
 				cin >> n;
 				sum = sum_series(x, n);
 			}
 			else
 			{
 				double eps;
-				cout << "Введите точность вычисления = ";
+				cout << "Р’РІРµРґРёС‚Рµ С‚РѕС‡РЅРѕСЃС‚СЊ РІС‹С‡РёСЃР»РµРЅРёСЏ = ";
 				cin >> eps;
 				int count = 0;
 				sum = sum_series(x, eps, &count);
-				print_answer("Количество слагаемых", count);
+				print_answer("РљРѕР»РёС‡РµСЃС‚РІРѕ СЃР»Р°РіР°РµРјС‹С…", count);
 			}
-			print_answer("Точное значение", 1 / (1 + x));
-			print_answer("Приближенное значение", sum);
-			cout << "Завершить работу? (Y(y) , любая другая клавиша - продолжить работу): ";
+			print_answer("РўРѕС‡РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ", 1 / (1 + x));
+			print_answer("РџСЂРёР±Р»РёР¶РµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ", sum);
+			cout << "Р—Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ? (Y(y) , Р»СЋР±Р°СЏ РґСЂСѓРіР°СЏ РєР»Р°РІРёС€Р° - РїСЂРѕРґРѕР»Р¶РёС‚СЊ СЂР°Р±РѕС‚Сѓ): ";
 			cin >> isExit;
 			if (isExit == 'Y' || isExit == 'y')
 				choice = 3;
@@ -69,7 +69,7 @@ void read_and_check(T& x, F condition, const char* message) {
 	cout << message;
 	while (!(cin >> x && condition(x)))
 	{
-		cout << "Ошибка ввода!" << endl;
+		cout << "РћС€РёР±РєР° РІРІРѕРґР°!" << endl;
 		cin.clear();
 		cin.ignore(cin.rdbuf()->in_avail());
 		cout << message;
@@ -83,10 +83,10 @@ void print_answer(const char* message, double sum)
 }
 
 int main_menu() {
-	cout << "Меню" << endl;
-	cout << "1. Сумма заданного количества слагаемых" << endl;
-	cout << "2. Сумма с заданной точностью" << endl;
-	cout << "3. Завершение работы" << endl;
+	cout << "РњРµРЅСЋ" << endl;
+	cout << "1. РЎСѓРјРјР° Р·Р°РґР°РЅРЅРѕРіРѕ РєРѕР»РёС‡РµСЃС‚РІР° СЃР»Р°РіР°РµРјС‹С…" << endl;
+	cout << "2. РЎСѓРјРјР° СЃ Р·Р°РґР°РЅРЅРѕР№ С‚РѕС‡РЅРѕСЃС‚СЊСЋ" << endl;
+	cout << "3. Р—Р°РІРµСЂС€РµРЅРёРµ СЂР°Р±РѕС‚С‹" << endl;
 	function<bool(int)> Lambda = [](int x) -> bool
 	{
 		return x >= 1 && x <= 3;
