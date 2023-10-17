@@ -12,9 +12,10 @@ using std::endl;
 using std::function;
 
 
-void print_answer(const char* message, double s);
+void print_answer(const char* message, double value);
+void print_answer(const char* message, int value);
 double sum_series(double x, int n);
-double sum_series(double x, double eps, int *i);
+double sum_series(double x, double eps, int& i);
 int main_menu();
 template <typename T, typename F>
 void read_and_check(T& x, F condition, const char* message);
@@ -49,7 +50,7 @@ int main()
 				cout << "Введите точность вычисления = ";
 				cin >> eps;
 				int count = 0;
-				sum = sum_series(x, eps, &count);
+				sum = sum_series(x, eps, count);
 				print_answer("Количество слагаемых", count);
 			}
 			print_answer("Точное значение", 1 / (1 + x));
@@ -77,11 +78,14 @@ void read_and_check(T& x, F condition, const char* message) {
 
 }
 
-void print_answer(const char* message, double sum)
+void print_answer(const char* message, double value)
 {
-	cout << setw(28) << left << message << " = " << fixed << setprecision(11) << sum << endl;
+	cout << setw(28) << left << message << " = " << fixed << setprecision(11) << value << endl;
 }
-
+void print_answer(const char* message, int value)
+{
+	cout << setw(28) << left << message << " = " << fixed << setprecision(11) << value << endl;
+}
 int main_menu() {
 	cout << "Меню" << endl;
 	cout << "1. Сумма заданного количества слагаемых" << endl;
@@ -107,7 +111,7 @@ double sum_series(double x, int n)
 	return sum;
 }
 
-double sum_series(double x, double eps, int *n)
+double sum_series(double x, double eps, int& n)
 {
 	double a = 1, sum = 0;
 	for (int i = 0; i < 2; ++i)
@@ -116,7 +120,7 @@ double sum_series(double x, double eps, int *n)
 		{
 			sum += a;
 			a *= (-x);
-			*n += 1;
+			n += 1;
 		}
 		return sum;
 	}
